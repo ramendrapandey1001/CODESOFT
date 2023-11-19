@@ -73,6 +73,9 @@ public class AtmInterface {
 
         if (choice == 'y')
             AtmInterface.main(null);
+        if(choice == 'n')
+            System.out.println("-*-*-*-*-*--*-*-*-*-Thank You-*-*-*-*-*-*-*-*-*-*-");
+
     }
 
     private static void credit(Clint clint) {
