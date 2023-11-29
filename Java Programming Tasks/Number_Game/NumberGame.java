@@ -31,7 +31,7 @@ public class NumberGame {
         int randomInt = NumberGame.ramdomInt(lowerLimit, upperLimit);
         // System.out.println("######" + randomInt);//To test if the random number is
         // being generated or not
-        // This loop will take care of number of attampts per
+        // This loop will take care of number of attempts per
         // game----------------------------------------------------
         for (int i = 0; i <= noRound; i++) {
             int guess = NumberGame.prompt(i);
@@ -52,7 +52,7 @@ public class NumberGame {
         // quit-------------------------------------
         System.out.println("Do you want to play other round(y/n)");
         char choice = scanner.next().charAt(0);
-        // This will analyse the responce, if y => main method will run again if n=> It
+        // This will analyse the response, if y => main method will run again if n=> It
         // will display the thanks message
         if (choice == 'y') {
             round = round + 1;
@@ -86,9 +86,11 @@ public class NumberGame {
         System.out.println("Set new value:-");
         upperLimit = scanner.nextInt();
 
+        NumberGame.main(null);
+
     }
 
-    // This method will generate a random number withen the limits
+    // This method will generate a random number within the limits
     // specified---------------------------------------
     public static int ramdomInt(int num1, int num2) {
         Random random = new Random();
@@ -100,17 +102,17 @@ public class NumberGame {
         return temp2;
     }
 
-    // This method will prompt the user to enter gussed
+    // This method will prompt the user to enter guessed
     // number-----------------------------------------------------
     public static int prompt(int attampts) {
-        System.out.println("-----------------------------------" + "Number of attampts left " + (5 - attampts)
+        System.out.println("-----------------------------------" + "Number of attampts left " + (noRound - attampts)
                 + "-----------------------------------");
         System.out.println("Guess a number:- ");
         int num = scanner.nextInt();
         return num;
     }
 
-    // This method will compare the gusse with the randomly generated
+    // This method will compare the guesses with the randomly generated
     // number---------------------------------------
     public static String compare(int rand, int guess) {
         String result = "Invalid Guess, try again with a number";

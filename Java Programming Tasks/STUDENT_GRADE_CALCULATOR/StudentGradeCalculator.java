@@ -1,21 +1,21 @@
-package STUDENT_GRADE_CALCULATOR;
 
+
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Scanner;
 
 public class StudentGradeCalculator {
 
     static Float marksPerSubject = 100.00f;
-    static char result;
     static LinkedList<String> subjects = new LinkedList<>();
     static Scanner scanner = new Scanner(System.in);
 
     static {
-        System.out.println("-*-*-*-*-*--*-*-*-*-Welcome to Student Grade Calculator-*-*-*-*-*-*-*-*-*-*-");
+        System.out.println("-*-*-*-*-*-*-*-*-*-*-Welcome to Student Grade Calculator-*-*-*-*-*-*-*-*-*-*-");
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         LinkedList<Float> marks = StudentGradeCalculator.input();
 
@@ -33,8 +33,10 @@ public class StudentGradeCalculator {
         System.out.println("Press [n] to terminate program");
 
         char choice = scanner.next().charAt(0);
-        if (choice == 'y')
+        if (choice == 'y'){
+            subjects.clear();
             StudentGradeCalculator.main(null);
+        }
         else if (choice == 'n')
             System.out.println("-*-*-*-*-*--*-*-*-*-*-*-*-*-*-Thank You-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-");
 
@@ -45,17 +47,17 @@ public class StudentGradeCalculator {
     }
 
     private static void display(LinkedList<Float> marks, Float obtained, char grade, Float percentage) {
-        System.out.println("-*-*-*-*-*--*-*-*-*-*-*-*-*-*-*Final Result-*-*-*-*-*--*-*-*-*-*-*-*-*-*-*");
-        System.out.println("_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._.");
+        System.out.println("-*-*-*-*-*--*-*-*-*-*-*-*-*-*-*-*-Final Result-*-*-*-*-*--*-*-*-*-*-*-*-*-*-*-*");
+        System.out.println("_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._");
 
-        System.out.print("|| " + StudentGradeCalculator.print("Subjects", 15));
+        System.out.print("|| " + StudentGradeCalculator.print("Subjects", 20));
         System.out.print(" | " + StudentGradeCalculator.print("Total Marks", 11));
         System.out.print(" | " + StudentGradeCalculator.print("Obtained Marks", 14));
         System.out.print(" | " + StudentGradeCalculator.print("Percentage", 10));
         System.out.print(" | " + StudentGradeCalculator.print("Grade", 5) + " ||");
         System.out.println();
         for (int i = 0; i < subjects.size(); i++) {
-            System.out.print("|| " + StudentGradeCalculator.print(subjects.get(i), 15));
+            System.out.print("|| " + StudentGradeCalculator.print(subjects.get(i), 20));
             System.out.print(" | " + StudentGradeCalculator.print(marksPerSubject.toString(), 11));
             System.out.print(" | " + StudentGradeCalculator.print(marks.get(i).toString(), 14));
             System.out.print(" | " + StudentGradeCalculator
@@ -71,7 +73,7 @@ public class StudentGradeCalculator {
             System.out.println();
 
         }
-        System.out.println("_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._.");
+        System.out.println("_._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._._");
 
         System.out.println("Total marks obtained:- " + obtained);
         System.out.println("Average Percentage Obtained:- " + percentage + "%");
@@ -79,18 +81,21 @@ public class StudentGradeCalculator {
 
     }
 
-    public static LinkedList<Float> input() {
+    public static LinkedList<Float> input() throws Exception{
         LinkedList<Float> list = new LinkedList<>();
         System.out.println("Enter subjects and marks");
         System.out.println("Type [done] when entered");
-        String temp1 = "";
+        System.out.println("Press Enter to continue");
+        scanner.nextLine();
+        //String temp1 = "";
         while (true) {
             System.out.println("Enter subject name:- ");
-            temp1 = scanner.next();
+           String  temp1 = scanner.nextLine();
             if (temp1.equals("done"))
                 break;
-            System.out.println("Enter markes obtained in " + temp1 + ":-");
+            System.out.println("Enter marks obtained in " + temp1 + ":-");
             Float temp2 = scanner.nextFloat();
+            scanner.nextLine();
             subjects.offer(temp1);
             list.add(temp2);
         }
@@ -122,20 +127,18 @@ public class StudentGradeCalculator {
     public static String print(String str, int x) {
         char[] arr = new char[x];
         int i = 0;
-        for (int j = 0; j < x; j++) {
-            arr[j] = '_';
-        }
+        Arrays.fill(arr, '_');
         for (char c : str.toCharArray()) {
             arr[i] = c;
             i++;
         }
-        String str2 = "";
+        StringBuilder str2 = new StringBuilder();
 
         for (char c : arr) {
-            str2 = str2 + c;
+            str2.append(c);
         }
 
-        return str2;
+        return str2.toString();
     }
 
 }
